@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEVEN的AI助手</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/crypto-js.min.js"></script>
+</head>
+<body>
+    <!-- 激活码模态框 -->
+    <div id="activateModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="auth-container">
+                <h2>充值激活码</h2>
+                <input type="text" id="activationCode" placeholder="请输入激活码">
+                <button class="auth-btn" onclick="activateCode()">激活</button>
+                <button class="auth-btn secondary-btn" onclick="closeActivateModal()">取消</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 登录/注册模态框 -->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <div class="auth-container" id="loginForm">
+                <h2>登录</h2>
+                <input type="text" id="loginUsername" placeholder="用户名">
+                <input type="password" id="loginPassword" placeholder="密码">
+                <button class="auth-btn" onclick="login()">登录</button>
+                <p>还没有账号？<a href="#" onclick="showRegisterForm()">立即注册</a></p>
+            </div>
+            <div class="auth-container" id="registerForm" style="display: none;">
+                <h2>注册</h2>
+                <input type="text" id="registerUsername" placeholder="用户名">
+                <input type="password" id="registerPassword" placeholder="密码">
+                <input type="password" id="confirmPassword" placeholder="确认密码">
+                <button class="auth-btn" onclick="register()">注册</button>
+                <p>已有账号？<a href="#" onclick="showLoginForm()">立即登录</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 添加微信模态框 -->
+    <div id="wechatModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="auth-container">
+                <h2>添加客服微信</h2>
+                <div class="wechat-info">
+                    <p class="wechat-id">BbyNo7s</p>
+                    <p class="wechat-tip">请复制微信号添加客服</p>
+                </div>
+                <button class="auth-btn" onclick="copyWechat()">复制微信号</button>
+                <button class="auth-btn secondary-btn" onclick="closeWechatModal()">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="chat-container" style="display: none;">
+        <div class="chat-header">
+            <h1>SEVEN的AI助手</h1>
+            <div class="chat-info">
+                <span class="user-info">账号：<span id="currentUser">未登录</span></span>
+                <span class="remaining-count">剩余对话次数：<span id="remainingCount">20</span></span>
+                <button class="activate-btn" onclick="showActivateModal()">
+                    充值次数
+                </button>
+                <button class="wechat-btn" onclick="showWechatModal()">
+                    <img src="https://cdn-icons-png.flaticon.com/512/124/124034.png" alt="WeChat" class="wechat-icon">
+                    联系客服
+                </button>
+                <button class="logout-btn" onclick="logout()">退出</button>
+            </div>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <!-- 修改欢迎消息 -->
+            <div class="message ai-message">
+                <span>您好！我是Seven的AI小助手，很高兴为您服务。每个激活码可增加20次对话机会。</span>
+            </div>
+        </div>
+        <div class="chat-input">
+            <textarea id="userInput" placeholder="请输入您的问题...（剩余20次对话机会）"></textarea>
+            <button onclick="sendMessage()">发送</button>
+        </div>
+    </div>
+    <script src="auth.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 

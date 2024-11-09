@@ -1,0 +1,363 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chat-container {
+    width: 95%;
+    max-width: 1200px;
+    height: 95vh;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-header {
+    padding: 20px;
+    background-color: #1a73e8;
+    color: white;
+    border-radius: 20px 20px 0 0;
+}
+
+.chat-header h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.chat-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 14px;
+}
+
+.user-info, .remaining-count {
+    white-space: nowrap;
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: #f8f9fa;
+    height: calc(95vh - 220px);
+}
+
+.message {
+    margin-bottom: 15px;
+    padding: 15px 20px;
+    border-radius: 15px;
+    max-width: 85%;
+    animation: fadeIn 0.3s ease;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.user-message {
+    background-color: #1a73e8;
+    color: white;
+    margin-left: auto;
+    box-shadow: 0 2px 5px rgba(26,115,232,0.2);
+}
+
+.ai-message {
+    background-color: white;
+    color: #333;
+    margin-right: auto;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.chat-input {
+    padding: 25px;
+    border-top: 1px solid #eee;
+    background-color: white;
+    border-radius: 0 0 20px 20px;
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+}
+
+.input-container {
+    display: flex;
+    gap: 10px;
+}
+
+textarea {
+    flex: 1;
+    padding: 15px 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: 15px;
+    resize: none;
+    height: 100px;
+    font-size: 18px;
+    line-height: 1.5;
+    font-family: Arial, sans-serif;
+}
+
+textarea:focus {
+    border-color: #1a73e8;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(26,115,232,0.2);
+}
+
+button {
+    padding: 15px 30px;
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    height: 100px;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #1557b0;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(26,115,232,0.3);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+.typing {
+    display: inline-block;
+    margin-left: 4px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.remaining-count {
+    color: #fff;
+    font-weight: bold;
+}
+
+.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 25px;
+    border-radius: 20px;
+    width: 320px;
+    max-width: 400px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.auth-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.auth-container h2 {
+    text-align: center;
+    color: #1a73e8;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.auth-container input {
+    padding: 8px 12px;
+    height: 40px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.auth-container input:focus {
+    border-color: #1a73e8;
+    outline: none;
+}
+
+.auth-container button {
+    padding: 8px 15px;
+    height: 40px;
+    font-size: 15px;
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+    margin: 5px 0;
+}
+
+.auth-container button:hover {
+    background-color: #1557b0;
+    transform: none;
+    box-shadow: none;
+}
+
+.auth-container p {
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.auth-container a {
+    color: #1a73e8;
+    text-decoration: none;
+}
+
+.auth-container a:hover {
+    text-decoration: underline;
+}
+
+.logout-btn {
+    padding: 5px 12px;
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    height: auto;
+    margin-left: 10px;
+}
+
+.logout-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.wechat-btn {
+    padding: 5px 12px;
+    background-color: #07C160;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-left: 10px;
+}
+
+.wechat-btn:hover {
+    background-color: #06ae56;
+}
+
+.wechat-icon {
+    width: 16px;
+    height: 16px;
+    filter: brightness(0) invert(1);
+}
+
+/* 添加激活码按钮样式 */
+.activate-btn {
+    padding: 5px 12px;
+    background-color: #ff9800;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-left: 10px;
+}
+
+.activate-btn:hover {
+    background-color: #f57c00;
+}
+
+/* 次要按钮样式 */
+.secondary-btn {
+    background-color: #757575 !important;
+    margin-top: 5px !important;
+}
+
+.secondary-btn:hover {
+    background-color: #616161 !important;
+}
+
+/* 当次数用完时的提示样式 */
+.usage-expired {
+    text-align: center;
+    padding: 15px;
+    background-color: #fff3e0;
+    border-radius: 10px;
+    margin: 10px 0;
+    color: #e65100;
+}
+
+/* 添加微信信息样式 */
+.wechat-info {
+    text-align: center;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+
+.wechat-id {
+    font-size: 24px;
+    font-weight: bold;
+    color: #07C160;
+    margin-bottom: 10px;
+}
+
+.wechat-tip {
+    color: #666;
+    font-size: 14px;
+}
+
+/* 复制成功提示样式 */
+.copy-success {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    z-index: 2000;
+    animation: fadeOut 2s forwards;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    70% { opacity: 1; }
+    100% { opacity: 0; }
+}
